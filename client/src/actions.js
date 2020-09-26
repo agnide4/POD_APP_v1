@@ -12,7 +12,7 @@
 // });
 
 //importing LOGIN constants
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, GET_COURSES_SUCCESS, GET_COURSES_FAILURE, GET_COURSES_REQUEST } from "./constants";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, GET_COURSES_SUCCESS, GET_COURSES_FAILURE, GET_COURSES_REQUEST, ADD_COURSES_FAILURE } from "./constants";
 import { createSession } from "./utils/sessions";
 import { GET_COURSES_REQUEST, GET_COURSES_SUCCESS, GET_COURSES_FAILURE } from "./constants"
 import axios from "axios";
@@ -101,3 +101,30 @@ export const loginAttempt = (creds) => {
               })
           }
         }
+
+//Action to add courses only available to instructor route
+const addCourseSuccess = (course) => ({
+  type: ADD_COURSES_SUCCESS,
+  payload: course,
+});
+const addCourseError = (error) => ({ type: ADD_COURSES_FAILURE, payload: error });
+
+export const addCourses = (course) => {
+  console.log(course);
+  return (dispatch, getState) => {
+    dispatch({ type: ADD_POST_STARTED });
+    axios
+      .post("/api/user/instructor/courses", course, {
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+      .then((response) => {
+        dispatch(addCourseSuccess({...course, id: response.data.id }));
+      })
+      .catch((error) => {
+        dispatch(addCourseError(error.message));
+      });
+  };
+};
+   

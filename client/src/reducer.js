@@ -1,7 +1,7 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from "./constants";
 import { validateSession, getSessionAuthObj } from "./utils/sessions";
 import { GET_COURSES_REQUEST, GET_COURSES_SUCCESS, GET_COURSES_FAILURE } from "./constants"
-
+import { ADD_COURSES_REQUEST, ADD_COURSES_SUCCESS, ADD_COURSES_FAILURE } from "./constants"
 
 export const initialState = {
   isFetchingAuth: false,
@@ -40,6 +40,13 @@ export default (state = initialState, action) => {
     case GET_COURSES_SUCCESS:
       return {...state, courses: action.payload, error: null}
     case GET_COURSES_FAILURE:
+      return {...state, error: action.payload}
+
+    case ADD_COURSES_REQUEST:
+      return {...state, error: null}
+    case ADD_COURSES_SUCCESS:
+      return {...state, courses: state.courses.concat(action.payload), error: null}
+    case ADD_COURSES_FAILURE:
       return {...state, error: action.payload}
       
     default:

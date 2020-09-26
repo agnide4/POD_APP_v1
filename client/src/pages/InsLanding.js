@@ -5,9 +5,15 @@ import AppNavbar from "../Components/AppNavbar";
 import "../instructor.css";
 
 
+function addCourseModal(){
+    
+}
+
+
 export default function InsLanding() {
     const [stuList, setStudent] = useState();
     const [coursesList, setCourses] = useState(false);
+    
 
 
     return (
