@@ -2,7 +2,7 @@ import React from 'react'
 import Card from "react-bootstrap/Card"
 
 export default function CourseCard(props) {
-   
+   const { courses } = props
 
 
     return (

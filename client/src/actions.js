@@ -12,8 +12,9 @@
 // });
 
 //importing LOGIN constants
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from "./constants";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, GET_COURSES_SUCCESS, GET_COURSES_FAILURE, GET_COURSES_REQUEST } from "./constants";
 import { createSession } from "./utils/sessions";
+import { GET_COURSES_REQUEST, GET_COURSES_SUCCESS, GET_COURSES_FAILURE } from "./constants"
 import axios from "axios";
 
 //action: LOGIN_SUCCESS once backend call is successfull
@@ -60,3 +61,43 @@ export const loginAttempt = (creds) => {
       });
   }
 }
+
+//action to display courses//This function maybe used for both the student and instructor portal
+        //When Request from API is successful
+        const getCourseSuccess = (courses) => ({
+          type: GET_COURSES_SUCCESS,
+          payload: course
+        })
+        //When Request from API fails
+        const getCourseFailure = (error) => ({
+          type: GET_COURSES_FAILURE,
+          payload: error,
+        })
+        //courses Api request for instructor
+        export const getCourses = () => {
+          return (dispatch, getState) => {
+            dispatch({type: GET_COURSES_REQUEST});
+            axios
+              .get("/api/user/instructor/courses")
+              .then((response) => {
+                dispatch(getCourseSuccess(response.data))
+              })
+              .catch((error) => {
+                dispatch(getCourseFailure(error.message))
+              })
+          }
+        }
+        //Get Courses Student API request
+        export const getStuCourses = () => {
+          return (dispatch, getState) => {
+            dispatch({type: GET_COURSES_REQUEST});
+            axios
+              .get("/api/user/student/courses")
+              .then((response) => {
+                dispatch(getCourseSuccess(response.data))
+              })
+              .catch((error) => {
+                dispatch(getCourseFailure(error.message))
+              })
+          }
+        }

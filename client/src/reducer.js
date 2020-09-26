@@ -1,5 +1,7 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from "./constants";
 import { validateSession, getSessionAuthObj } from "./utils/sessions";
+import { GET_COURSES_REQUEST, GET_COURSES_SUCCESS, GET_COURSES_FAILURE } from "./constants"
+
 
 export const initialState = {
   isFetchingAuth: false,
@@ -33,6 +35,13 @@ export default (state = initialState, action) => {
         authObj: {},
         error: action.payload
       };
+    case GET_COURSES_REQUEST:
+      return {...state, courses: [], error: null}
+    case GET_COURSES_SUCCESS:
+      return {...state, courses: action.payload, error: null}
+    case GET_COURSES_FAILURE:
+      return {...state, error: action.payload}
+      
     default:
       return state;
   }
