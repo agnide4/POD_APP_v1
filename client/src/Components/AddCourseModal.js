@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react"
 import { addCourses } from "../actions"
-import { Form, Modal, Button } from 'react-bootstrap';
+import { Form, Modal, Button, InputGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -13,6 +13,12 @@ export default function AddCourseModal(props) {
     ] 
     )
     const [validated, setValidated] = useState(false);
+    const [checked, setChecked] = useState(false)
+
+    const handleChange = (e) =>{
+        Course Name : 
+        
+    }
 
     const handleSubmit = (e) =>{
         const form = e.currentTarget;
@@ -21,6 +27,7 @@ export default function AddCourseModal(props) {
             e.stopPropagation();
         }
         setValidated(true);
+
     }
   
 
@@ -38,39 +45,19 @@ export default function AddCourseModal(props) {
                 <Form noValidate validated={validated} onSubmit={ handleSubmit }>
                 <Form.Group controlId="formPlainText">
                     <Form.Label>Course Name</Form.Label>
-                    <Form.Control  type="Text" placeholder="Add New Course" required/>
-                    <Form.Control.Feedback type="invalid">New course Name required</Form.Control.Feedback>
-                    
+                    <Form.Control  type="input" placeholder="Add New Course" required/>
+                    <Form.Control.Feedback type="invalid">New course Name required</Form.Control.Feedback>  
                 </Form.Group>
-
-                <Form.Group>
-                {['checkbox'].map((type) => (
-                <div key={`default-${type}`} className="subject">
-                <Form.Check 
-                    type={type}
-                    id={`default-${type}`}
-                    label={`Math`}
-                />
-
-                <Form.Check
-                    type={type}
-                    label={`French`}
-                    id={`default-${type}`}
-                />
-                <Form.Check
-                    type={type}
-                    label={`Biology`}
-                    id={`default-${type}`}
-                />
-                <Form.Check
-                    type={type}
-                    label={`English`}
-                    id={`-default-${type}`}
-                />
-                </div>
-            ))}
-
-                </Form.Group> 
+                <Form.Group controlId="Subject" required onSelectCapture>
+                    <Form.Control as="select">
+                        <option>Mathematics</option>
+                        <option>Science</option>
+                        <option>Social studies</option>
+                        <option>Language Arts</option>
+                        <option>Computer Science</option>
+                    </Form.Control>
+                      
+                </Form.Group>
                 <Button className="primary-button" type="submit">Submit</Button>
             </Form>   
             </Modal.Body>
@@ -82,3 +69,31 @@ export default function AddCourseModal(props) {
 
     )
 }
+
+
+
+// {['checkbox'].map((type) => (
+//     <div key={`default-${type}`} className="subject">
+//     <Form.Check 
+//         type={type}
+//         id={`default-${type}`}
+//         label={`Math`}  
+//     />
+
+//     <Form.Check
+//         type={type}
+//         label={`French`}
+//         id={`default-${type}`}
+//     />
+//     <Form.Check
+//         type={type}
+//         label={`Biology`}
+//         id={`default-${type}`}
+//     />
+//     <Form.Check
+//         type={type}
+//         label={`English`}
+//         id={`-default-${type}`}
+//     />
+//     </div>
+// ))}
