@@ -9,6 +9,7 @@ import Unauthorized from "./Components/Unauthorized";
 import ProtectedRoute from "./Components/ProtectedRoute";
 //Importing CSS
 import "./App.css";
+import InsCoursePage from "./pages/InsCoursePage";
 
 function App() {
   //importing from global state
@@ -28,6 +29,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <ProtectedRoute exact path="/instructor" auth={isSessionValid()} component={InsLanding} />
+        <ProtectedRoute exact path="/instructor-courses" auth={isSessionValid()} component={InsCoursePage} />
         {/* <Route exact path="/instructor" component={InsLanding} /> */}
         <Route exact path="/unauthorized" component={Unauthorized} />
       </Switch>
