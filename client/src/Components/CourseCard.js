@@ -1,11 +1,17 @@
 import React from 'react'
+import { useEffect, useDispatch } from "react"
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
+import { getCourses } from '../actions';
 
 export default function CourseCard(props) {
    const { courses } = props
 
+//    const dispatch = useDispatch()
 
+   console.log(courses)
+    
+   console.log(courses.name)
     return (
         <div>
             {courses.map((course) => (

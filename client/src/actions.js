@@ -74,11 +74,16 @@ export const loginAttempt = (creds) => {
           payload: error,
         })
         //courses Api request for instructor
-        export const getCourses = () => {
+        export const getCourses = (token) => {
+          console.log(token)
           return (dispatch, getState) => {
             dispatch({type: GET_COURSES_REQUEST});
             axios
-              .get("/api/user/instructor/courses")
+              .get("/api/user/instructor/courses", {
+                headers: {
+                  'x-access-token': token
+                }
+              })
               .then((response) => {
                 dispatch(getCourseSuccess(response.data))
               })
@@ -95,6 +100,7 @@ export const loginAttempt = (creds) => {
               .get("/api/user/student/courses")
               .then((response) => {
                 dispatch(getCourseSuccess(response.data))
+                console.log(response.data)
               })
               .catch((error) => {
                 dispatch(getCourseFailure(error.message))
