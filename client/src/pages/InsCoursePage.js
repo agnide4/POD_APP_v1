@@ -15,11 +15,11 @@ export default function InsCoursePage() {
        
       ]);
       console.log(courses)
-      console.log(courses)
-
+     
+      
       useEffect(() => {
-        dispatch(getCourses());
-      },[]);
+        dispatch(getCourses(authObj.accessToken));
+      },[authObj]);
     
     
 
